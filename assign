@@ -1,0 +1,160 @@
+class Member:
+    def __init__(self, name, membership_id):
+        self.name = name
+        self.membership_id = membership_id
+
+    def display_info(self):
+        print(f"Member Name: {self.name}")
+        print(f"Membership ID: {self.membership_id}")
+
+class StudentMember(Member):
+    def __init__(self, name, membership_id):
+        super().__init__(name, membership_id)
+        self.books_borrowed = []
+
+    def add_book(self, book_title):
+        self.books_borrowed.append(book_title)
+        print(f'"{book_title}" has been checked out.')
+
+    def return_book(self, book_title):
+        if book_title in self.books_borrowed:
+            self.books_borrowed.remove(book_title)
+            print(f'"{book_title}" has been returned.')
+        else:
+            print(f'"{book_title}" not found in borrowed books.')
+
+    def display_status(self):
+        print(f"\n{self.name}'s Borrowing Status:")
+        if self.books_borrowed:
+            print("Books currently borrowed:")
+            for book in self.books_borrowed:
+                print(f" - {book}")
+        else:
+            print("No books currently borrowed.")
+student = StudentMember("Alice", "S12345")
+student.display_info()
+student.add_book("Python Programming")
+student.add_book("Data Structures")
+student.display_status()
+student.return_book("Python Programming")
+student.display_status()
+
+
+
+
+
+
+class Device:
+    def __init__(self, device_id, model):
+        self.device_id = device_id
+        self.model = model
+
+    def display_info(self):
+        print(f"Device ID: {self.device_id}")
+        print(f"Model: {self.model}")
+class Flyer:
+    def fly(self):
+        print("The drone is flying...")
+class Drone(Device, Flyer):
+    def __init__(self, device_id, model):
+        super().__init__(device_id, model)
+
+
+
+
+
+
+
+
+class User:
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+
+    def display_info(self):
+        print(f"User Name: {self.name}")
+        print(f"Email: {self.email}")
+
+class Instructor(User):
+    def __init__(self, name, email, subject):
+        super().__init__(name, email)
+        self.subject = subject
+
+    def upload_content(self, content_title):
+        print(f"Instructor {self.name} uploaded content: {content_title}")
+
+    def display_info(self):
+        super().display_info()
+        print(f"Subject Expertise: {self.subject}")
+
+class CourseCreator(Instructor):
+    def __init__(self, name, email, subject):
+        super().__init__(name, email, subject)
+        self.courses = {}
+
+    def create_course(self, course_name, modules):
+        self.courses[course_name] = modules
+        print(f"Course '{course_name}' created with modules: {', '.join(modules)}")
+
+    def display_info(self):
+        super().display_info()
+        print("Role: Course Creator")
+        print(f"Courses Created: {', '.join(self.courses.keys()) if self.courses else 'None'}")
+creator = CourseCreator("Dr. Smith", "smith@example.com", "Data Science")
+creator.display_info()
+creator.upload_content("Introduction to Python")
+creator.create_course("Python Basics", ["Syntax", "Variables", "Loops"])
+creator.display_info()
+
+    def capture_image(self):
+        print("Image captured by the drone.")
+drone1 = Drone("DRN001", "Phantom-X")
+drone1.display_info()       
+drone1.fly()                
+drone1.capture_image()
+
+
+
+
+
+
+class Appliance:
+    def status(self):
+        print("Appliance status is unknown.")
+class Fan(Appliance):
+    def status(self):
+        print("Fan is spinning at medium speed.")
+class Light(Appliance):
+    def status(self):
+        print("Light is turned on with warm white brightness.")
+class AC(Appliance):
+    def status(self):
+        print("AC is cooling at 22°C in auto mode.")
+devices = [Fan(), Light(), AC()]
+for device in devices:
+    device.status()
+
+
+
+
+
+
+import math
+
+class ShapeCalculator:
+    def area(self, a=None, b=None):
+        if a is not None and b is None:
+            return math.pi * a * a
+        elif a is not None and b is not None:
+            return a * b
+        else:
+            return "Invalid input: Provide 1 or 2 arguments."
+calc = ShapeCalculator()
+
+circle_area = calc.area(5)            
+rectangle_area = calc.area(4, 6)      
+invalid = calc.area()                 
+
+print(f"Area of Circle: {circle_area:.2f}")
+print(f"Area of Rectangle: {rectangle_area}")
+print(f"Invalid Case: {invalid}")
